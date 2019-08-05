@@ -22,7 +22,7 @@ namespace AzureFunctionOptionsConfigurationWithIoC
             _logger = logger ?? throw new ArgumentNullException(nameof(ILogger<OptionsTestFunctionApplication>));
         }
 
-        [FunctionName("HttpTrigger")]
+        [FunctionName("OptionsHttpTrigger")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]
             HttpRequest req)
@@ -30,7 +30,7 @@ namespace AzureFunctionOptionsConfigurationWithIoC
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
             var optionsTestResult = await _optionsTestService.DoSomethingAsync();
-            _logger.LogInformation($"Result A :{optionsTestResult}");
+            _logger.LogInformation($"Options Test Result :{optionsTestResult}");
 
 
             return new OkObjectResult(optionsTestResult);

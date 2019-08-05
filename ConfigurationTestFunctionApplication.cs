@@ -14,16 +14,19 @@ namespace AzureFunctionOptionsConfigurationWithIoC
         private readonly IConfigurationTestService _configurationTestService;
         private readonly ILogger<ConfigurationTestFunctionApplication> _logger;
 
-        public ConfigurationTestFunctionApplication(IConfigurationTestService configurationTestService, ILogger<ConfigurationTestFunctionApplication> logger)
+        public ConfigurationTestFunctionApplication(IConfigurationTestService configurationTestService,
+            ILogger<ConfigurationTestFunctionApplication> logger)
         {
-            _configurationTestService = configurationTestService ?? throw new ArgumentNullException(nameof(IConfigurationTestService));
+            _configurationTestService = configurationTestService ??
+                                        throw new ArgumentNullException(nameof(IConfigurationTestService));
             _logger = logger;
             ;
         }
 
-        [FunctionName("ConfigurationTestFunctionApplication")]
+        [FunctionName("ConfigurationTestTrigger")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]
+            HttpRequest req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
