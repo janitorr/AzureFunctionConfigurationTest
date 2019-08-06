@@ -1,0 +1,11 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "Token": "Vu7UMZqOh89Ple0Tu6qD",
+        "Endpoint": "http://www.contoso.com/api",
+        "testSettings__endpoint": "http://www.contoso.com/api",
+        "testSettings__token": "Vu7UMZqOh89Ple0Tu6qD"
+    }
+}
