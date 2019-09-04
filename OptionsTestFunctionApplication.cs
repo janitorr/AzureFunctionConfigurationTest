@@ -1,25 +1,25 @@
 using System;
 using System.Threading.Tasks;
-using AzureFunctionOptionsConfigurationWithIoC.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using AzureFunctionOptionsConfigurationWithIoC.Modules;
 
 namespace AzureFunctionOptionsConfigurationWithIoC
 {
     public class OptionsTestFunctionApplication
     {
-        private readonly ILogger<OptionsTestFunctionApplication> _logger;
-        private readonly IOptionsTestService _optionsTestService;
+        private readonly ILogger<OptionsTestFunctionApplication> logger;
+        private readonly TestSettings options;
 
-        public OptionsTestFunctionApplication(IOptionsTestService optionsTestService,
+        public OptionsTestFunctionApplication(IOptions<TestSettings> optionsTestService,
             ILogger<OptionsTestFunctionApplication> logger)
         {
-            _optionsTestService = optionsTestService ??
-                                  throw new ArgumentNullException(nameof(IOptionsTestService));
-            _logger = logger ?? throw new ArgumentNullException(nameof(ILogger<OptionsTestFunctionApplication>));
+            options = optionsTestService?.Value ?? throw new ArgumentNullException(nameof(optionsTestService));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [FunctionName("OptionsHttpTrigger")]
@@ -27,13 +27,9 @@ namespace AzureFunctionOptionsConfigurationWithIoC
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]
             HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            logger.LogInformation($"Options Test Result :{options}");
 
-            var optionsTestResult = await _optionsTestService.DoSomethingAsync();
-            _logger.LogInformation($"Options Test Result :{optionsTestResult}");
-
-
-            return new OkObjectResult(optionsTestResult);
+            return new OkObjectResult(options);
         }
     }
 }

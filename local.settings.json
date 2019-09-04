@@ -3,9 +3,11 @@
     "Values": {
         "AzureWebJobsStorage": "UseDevelopmentStorage=true",
         "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-        "Token": "Vu7UMZqOh89Ple0Tu6qD",
-        "Endpoint": "http://www.contoso.com/api",
-        "testSettings__endpoint": "http://www.contoso.com/api",
-        "testSettings__token": "Vu7UMZqOh89Ple0Tu6qD"
+        "testSettings__endpoint": "This-doesnt-work",
+        "TestSettings__Token": "Neither-does-this",
+        "TestSettings:Derp": "Nope, not working",
+        "Token": "This Is Used",
+        "Endpoint": "And This One",
+        "Derp": "And Also This One"
     }
 }
